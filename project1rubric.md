@@ -30,27 +30,27 @@
 
   * Endpoints should demonstrate standard CRUD operations.
   * At least **2 of these 10 APIs** must use **Bearer Token authentication** (these 2 protected APIs count toward the total 10).
-  * List the names of your implemented APIs (except for the Bearer Token APIs):
+  * List the names of your implemented APIs (except for the Bearer Token APIs): GET, POST, PUT
 * \[10/10%] Implemented at least **2 Bearer Token-protected APIs** in PHP/MySQL (**5% per API**).
 
   * Token authentication pattern should follow lecture/homework guidelines.
-  * List the names of the Bearer Token APIs:
+  * List the names of the Bearer Token APIs: DELETE
 * \[10/10%] Created **cURL test code** for all implemented APIs.
 
-  * List the file name:
+  * List the file name: test_curl
 * \[10/10%] Created **HTML/JavaScript test code** for all implemented APIs.
 
-  * List the file name:
+  * List the file name: test_client
 * \[5/5%] Database integration works correctly with MySQL.
 
   * Full credit only if the database portion works correctly.
-  * List your MySQL table names:
+  * List your MySQL table names: Students & Courses
 * \[10/10%] Code pushed to a **GitHub repository** with clear execution instructions.
 
   * **5%:** Required code is pushed to GitHub and a valid repository link is provided.
   * **5%:** Root `README.md` clearly explains prerequisites, database setup/schema import, server start commands (`http://localhost:8080`), and how to run tests. The grader can easily follow the instructions to run and test the project.
-  * Write your GitHub repository link:
-  * Write your GitHub repository README.md link:
+  * Write your GitHub repository link: https://github.com/luyizaa/project1
+  * Write your GitHub repository README.md link: https://github.com/luyizaa/project1/blob/main/README.md
 
 \---
 
@@ -75,14 +75,14 @@
   * Full credit requires **more than 15 slides/pages**, clear explanation, and meaningful coverage of the APIs.
   * Partial credit may be given for incomplete but substantial work.
   * No credit if no slide deck is submitted.
-  * List Marp file name:
+  * List Marp file name: api_tutorial.md
 * \[5/5%] The marp slides are correctly transformed into pdf files.
 
-  * List PDF file name:
+  * List PDF file name: api_tutorial.pdf
 * \[5/5%] Slides and PDFs uploaded to **GitHub**.
 
-  * Write your GitHub repository Marp file link:
-  * Write your GitHub repository PDF link:
+  * Write your GitHub repository Marp file link: https://github.com/luyizaa/project1/blob/main/presentation/api_tutorial.md
+  * Write your GitHub repository PDF link: https://github.com/luyizaa/project1/blob/main/presentation/api_tutorial.pdf
 
 \---
 
@@ -106,7 +106,7 @@
 
   * Full credit requires a clear deployment tutorial.
   * Include screen captures that show the NGINX server working.
-  * List Marp file name:
+  * List Marp file name: nginx_deployment
 
 \---
 

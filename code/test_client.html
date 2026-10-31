@@ -1,0 +1,326 @@
+//Project 1 test_client.html file
+//Referenced test_client.html from the submission examples
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Project 1 Test File - Students and Courses Databases</title>
+  <style>
+    body { font-family: sans-serif; margin: 24px; max-width: 900px; }
+    h2 { color: #1e3a8a; }
+    h3 { margin-top: 24px; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; }
+    .endpoint-card { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 6px; padding: 12px; margin-bottom: 12px; }
+    .method { display: inline-block; padding: 2px 8px; border-radius: 4px; font-weight: bold; font-size: 12px; color: #fff; margin-right: 8px; }
+    .get { background-color: #0284c7; }
+    .post { background-color: #16a34a; }
+    .put { background-color: #d97706; }
+    .delete { background-color: #dc2626; }
+    input { margin: 4px 6px 4px 0; padding: 4px 8px; font-size: 14px; }
+    button { padding: 6px 14px; cursor: pointer; font-weight: bold; background: #2563eb; color: white; border: none; border-radius: 4px; margin-top: 4px; }
+    button:hover { background: #1d4ed8; }
+    pre { background: #0f172a; color: #38bdf8; padding: 10px; border-radius: 4px; font-size: 13px; overflow-x: auto; min-height: 20px; }
+    .warning-box { background: #fef2f2; border-left: 4px solid #ef4444; padding: 12px; margin-bottom: 20px; color: #991b1b; }
+  </style>
+</head>
+<body>
+  <h2>Project 1 Test File (10 Endpoints)</h2>
+  
+  <div class="warning-box">
+    <strong>Note:</strong> Always access this file via HTTP at <code>http://localhost:8080/test_client.html</code> while the server is running.
+    Never open it directly as a <code>file:///</code> URL, or browser security will block API calls.
+  </div>
+
+
+  <!-- Students Section (5 APIs) -->
+  <h3>Students Resource</h3>
+ 
+  <!-- 1. GET /students -->
+  <div class="endpoint-card">
+    <span class="method get">GET</span><strong>/students</strong> — List all students<br>
+    <button onclick="getAllStudents()">Send GET /students</button>
+    <pre id="all-students-result">(Results will appear here)</pre>
+  </div>
+ 
+  <!-- 2. GET /students/{id} -->
+  <div class="endpoint-card">
+    <span class="method get">GET</span><strong>/students/{id}</strong> — Get a student by ID<br>
+    ID: <input id="get-student-id" type="number" value="1" style="width:70px;">
+    <button onclick="getStudent()">Send GET /students/{id}</button>
+    <pre id="single-student-result">(Results will appear here)</pre>
+  </div>
+ 
+  <!-- 3. POST /students -->
+  <div class="endpoint-card">
+    <span class="method post">POST</span><strong>/students</strong> — Create a student<br>
+    Name: <input id="new-name" value="Supercool Name">
+    Email: <input id="new-email" value="super@nku.edu">
+    Major: <input id="new-major" value="Cybersecurity">
+    Year: <input id="new-year" type="number" value="1" style="width:60px;"><br>
+    <button onclick="createStudent()">Send POST /students</button>
+    <pre id="create-student-result">(Results will appear here)</pre>
+  </div>
+ 
+  <!-- 4. PUT /students -->
+  <div class="endpoint-card">
+    <span class="method put">PUT</span><strong>/students</strong> — Update a student<br>
+    ID: <input id="update-student-id" type="number" value="1" style="width:70px;">
+    Name: <input id="update-name" value="Another Example">
+    Email: <input id="update-email" value="another@nku.edu">
+    Major: <input id="update-major" value="Computer Science">
+    Year: <input id="update-year" type="number" value="3" style="width:60px;"><br>
+    <button onclick="updateStudent()">Send PUT /students</button>
+    <pre id="update-student-result">(Results will appear here)</pre>
+  </div>
+ 
+  <!-- 5. DELETE /students/{id} -->
+  <div class="endpoint-card">
+    <span class="method delete">DELETE</span><strong>/students/{id}</strong> — Delete student (Bearer Token Required)<br>
+    ID: <input id="delete-student-id" type="number" value="2" style="width:70px;">
+    Token: <input id="delete-student-token" value="my-secret-token-123"><br>
+    <small>Leave the token empty to test a missing token, or change it to test an invalid one.</small><br>
+    <button onclick="deleteStudent()">Send DELETE /students/{id}</button>
+    <pre id="delete-student-result">(Results will appear here)</pre>
+  </div>
+ 
+  <!-- Courses Section (5 APIs) -->
+  <h3>Courses Resource</h3>
+ 
+  <!-- 6. GET /courses -->
+  <div class="endpoint-card">
+    <span class="method get">GET</span><strong>/courses</strong> — List all courses<br>
+    <button onclick="getAllCourses()">Send GET /courses</button>
+    <pre id="all-courses-result">(Results will appear here)</pre>
+  </div>
+ 
+  <!-- 7. GET /courses/{id} -->
+  <div class="endpoint-card">
+    <span class="method get">GET</span><strong>/courses/{id}</strong> — Get a course by ID<br>
+    ID: <input id="get-course-id" type="number" value="1" style="width:70px;">
+    <button onclick="getCourse()">Send GET /courses/{id}</button>
+    <pre id="single-course-result">(Results will appear here)</pre>
+  </div>
+ 
+  <!-- 8. POST /courses -->
+  <div class="endpoint-card">
+    <span class="method post">POST</span><strong>/courses</strong> — Create a course<br>
+    Title: <input id="new-title" value="AI-Enabled Software Engineering">
+    Department: <input id="new-department" value="Computer Science">
+    Credits: <input id="new-credits" type="number" value="3" style="width:60px;"><br>
+    <button onclick="createCourse()">Send POST /courses</button>
+    <pre id="create-course-result">(Results will appear here)</pre>
+  </div>
+ 
+  <!-- 9. PUT /courses -->
+  <div class="endpoint-card">
+    <span class="method put">PUT</span><strong>/courses</strong> — Update a course<br>
+    ID: <input id="update-course-id" type="number" value="1" style="width:70px;">
+    Title: <input id="update-title" value="Server-Side Web Development">
+    Department: <input id="update-department" value="Computer Science">
+    Credits: <input id="update-credits" type="number" value="4" style="width:60px;"><br>
+    <button onclick="updateCourse()">Send PUT /courses</button>
+    <pre id="update-course-result">(Results will appear here)</pre>
+  </div>
+ 
+  <!-- 10. DELETE /courses/{id} -->
+  <div class="endpoint-card">
+    <span class="method delete">DELETE</span><strong>/courses/{id}</strong> — Delete course (Bearer Token Required)<br>
+    ID: <input id="delete-course-id" type="number" value="2" style="width:70px;">
+    Token: <input id="delete-course-token" value="my-secret-token-123"><br>
+    <small>Leave the token empty to test a missing token, or change it to test an invalid one.</small><br>
+    <button onclick="deleteCourse()">Send DELETE /courses/{id}</button>
+    <pre id="delete-course-result">(Results will appear here)</pre>
+  </div>
+
+   <script>
+        const API_BASE = 'http://localhost:8080';
+
+        if (window.location.protocol === 'file:') {
+            document.getElementById('file-protocol-warning').style.display = 'block';
+            setTimeout(() => {
+                alert('🚨 WARNING: Do NOT open this file directly from your filesystem (file://)!\n\nBrowser security blocks API requests from local files.\n\nPlease start the server and open:\nhttp://localhost:8080/student_api_test.html');
+            }, 100);
+        }
+
+        async function getAllStudents() {
+            const resultEl = document.getElementById('all-students-result');
+            try {
+                const response = await fetch(`${API_BASE}/students`);
+                const data = await response.json();
+                const prefix = response.ok ? '' : `HTTP ${response.status}: `;
+                resultEl.textContent = prefix + JSON.stringify(data, null, 2);
+            } catch (error) {
+                resultEl.textContent = 'Request or response error: ' + error.message;
+            }
+        }
+
+        async function getStudent() {
+            const id = document.getElementById('get-student-id').value;
+            const resultEl = document.getElementById('single-student-result');
+            try {
+                const response = await fetch(`${API_BASE}/students/${id}`);
+                const data = await response.json();
+                const prefix = response.ok ? '' : `HTTP ${response.status}: `;
+                resultEl.textContent = prefix + JSON.stringify(data, null, 2);
+            } catch (error) {
+                resultEl.textContent = 'Request or response error: ' + error.message;
+            }
+        }
+
+        async function createStudent() {
+            const studentData = {
+                name: document.getElementById('new-name').value,
+                email: document.getElementById('new-email').value,
+                major: document.getElementById('new-major').value,
+                year: parseInt(document.getElementById('new-year').value)
+            };
+
+            const resultEl = document.getElementById('create-student-result');
+            try {
+                const response = await fetch(`${API_BASE}/students`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(studentData)
+                });
+                const data = await response.json();
+                const prefix = response.ok ? '' : `HTTP ${response.status}: `;
+                resultEl.textContent = prefix + JSON.stringify(data, null, 2);
+            } catch (error) {
+                resultEl.textContent = 'Request or response error: ' + error.message;
+            }
+        }
+
+        async function updateStudent() {
+            const id = document.getElementById('update-student-id').value;
+            const updateData = {
+                name: document.getElementById('update-name').value,
+                email: document.getElementById('update-email').value,
+                major: document.getElementById('update-major').value,
+                year: parseInt(document.getElementById('update-year').value)
+            };
+
+            const resultEl = document.getElementById('update-student-result');
+            try {
+                const response = await fetch(`${API_BASE}/students/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(updateData)
+                });
+                const data = await response.json();
+                const prefix = response.ok ? '' : `HTTP ${response.status}: `;
+                resultEl.textContent = prefix + JSON.stringify(data, null, 2);
+            } catch (error) {
+                resultEl.textContent = 'Request or response error: ' + error.message;
+            }
+        }
+
+        async function deleteStudent() {
+            const id = document.getElementById('delete-student-id').value;
+            const resultEl = document.getElementById('delete-student-result');
+            try {
+                const response = await fetch(`${API_BASE}/students/${id}`, {
+                    method: 'DELETE'
+                });
+                const data = await response.json();
+                const prefix = response.ok ? '' : `HTTP ${response.status}: `;
+                resultEl.textContent = prefix + JSON.stringify(data, null, 2);
+            } catch (error) {
+                resultEl.textContent = 'Request or response error: ' + error.message;
+            }
+        }
+        async function getAllCourses() {
+            const resultEl = document.getElementById('all-courses-result');
+            try {
+                const response = await fetch(`${API_BASE}/courses`);
+                const data = await response.json();
+                const prefix = response.ok ? '' : `HTTP ${response.status}: `;
+                resultEl.textContent = prefix + JSON.stringify(data, null, 2);
+            } catch (error) {
+                resultEl.textContent = 'Request or response error: ' + error.message;
+            }
+        }
+ 
+        async function getCourse() {
+            const id = document.getElementById('get-course-id').value;
+            const resultEl = document.getElementById('single-course-result');
+            try {
+                const response = await fetch(`${API_BASE}/courses/${id}`);
+                const data = await response.json();
+                const prefix = response.ok ? '' : `HTTP ${response.status}: `;
+                resultEl.textContent = prefix + JSON.stringify(data, null, 2);
+            } catch (error) {
+                resultEl.textContent = 'Request or response error: ' + error.message;
+            }
+        }
+ 
+        async function createCourse() {
+            const courseData = {
+                title: document.getElementById('new-title').value,
+                department: document.getElementById('new-department').value,
+                credits: parseInt(document.getElementById('new-credits').value)
+            };
+ 
+            const resultEl = document.getElementById('create-course-result');
+            try {
+                const response = await fetch(`${API_BASE}/courses`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(courseData)
+                });
+                const data = await response.json();
+                const prefix = response.ok ? '' : `HTTP ${response.status}: `;
+                resultEl.textContent = prefix + JSON.stringify(data, null, 2);
+            } catch (error) {
+                resultEl.textContent = 'Request or response error: ' + error.message;
+            }
+        }
+ 
+        async function updateCourse() {
+            const id = document.getElementById('update-course-id').value;
+            const updateData = {
+                id: parseInt(id),
+                title: document.getElementById('update-title').value,
+                department: document.getElementById('update-department').value,
+                credits: parseInt(document.getElementById('update-credits').value)
+            };
+ 
+            const resultEl = document.getElementById('update-course-result');
+            try {
+                const response = await fetch(`${API_BASE}/courses`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(updateData)
+                });
+                const data = await response.json();
+                const prefix = response.ok ? '' : `HTTP ${response.status}: `;
+                resultEl.textContent = prefix + JSON.stringify(data, null, 2);
+            } catch (error) {
+                resultEl.textContent = 'Request or response error: ' + error.message;
+            }
+        }
+ 
+         async function deleteCourse() {
+            const id = document.getElementById('delete-courset-id').value;
+            const resultEl = document.getElementById('delete-course-result');
+            try {
+                const response = await fetch(`${API_BASE}/courses/${id}`, {
+                    method: 'DELETE'
+                });
+                const data = await response.json();
+                const prefix = response.ok ? '' : `HTTP ${response.status}: `;
+                resultEl.textContent = prefix + JSON.stringify(data, null, 2);
+            } catch (error) {
+                resultEl.textContent = 'Request or response error: ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>
